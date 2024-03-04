@@ -217,12 +217,12 @@ public class MultiSheetReadListener extends AnalysisEventListener<Map<Integer, S
         Meta meta = metaMap.get(sheetName);
 
         // More than 50,000 rows are not allowed to write to the number table.
-        Integer totalRowsIncludingHeader = context.readSheetHolder().getApproximateTotalRowNumber();
-        log.info("Actual total number of rows (including header): {}", totalRowsIncludingHeader);
-        if (totalRowsIncludingHeader != null) {
-            ExceptionUtil.isTrue(totalRowsIncludingHeader - 1 <= limitProperties.getMaxRowCount(),
-                ActionException.ROW_EXCEED_LIMIT);
-        }
+        // Integer totalRowsIncludingHeader = context.readSheetHolder().getApproximateTotalRowNumber();
+        // log.info("Actual total number of rows (including header): {}", totalRowsIncludingHeader);
+        // if (totalRowsIncludingHeader != null) {
+        //    ExceptionUtil.isTrue(totalRowsIncludingHeader - 1 <= limitProperties.getMaxRowCount(),
+        //        ActionException.ROW_EXCEED_LIMIT);
+        // }
 
         if (headerMap.isEmpty()) {
             // skip blank lines without saving
@@ -330,10 +330,10 @@ public class MultiSheetReadListener extends AnalysisEventListener<Map<Integer, S
         }
 
         // More than 200 columns are not allowed to write to the number table.
-        log.info("actual total number of columns: {}", sheetHeadMap.get(sheetName).size());
-        ExceptionUtil.isTrue(
-            sheetHeadMap.get(sheetName).size() <= limitProperties.getMaxColumnCount(),
-            ActionException.COLUMN_EXCEED_LIMIT);
+        // log.info("actual total number of columns: {}", sheetHeadMap.get(sheetName).size());
+        // ExceptionUtil.isTrue(
+        // sheetHeadMap.get(sheetName).size() <= limitProperties.getMaxColumnCount(),
+        // ActionException.COLUMN_EXCEED_LIMIT);
 
         int currentSheetIndex = context.readSheetHolder().getSheetNo() + 1;
         int totalSheetSize = context.readWorkbookHolder().getParameterSheetDataList().size();

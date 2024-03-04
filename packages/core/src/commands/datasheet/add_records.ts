@@ -75,9 +75,9 @@ export const addRecords: ICollaCommandDef<IAddRecordsOptions, IAddRecordsResult>
     const recordIds = Object.keys(snapshot.recordMap);
     const newRecordIds = getNewIds(IDPrefix.Record, count, recordIds.length ? recordIds : snapshot.meta.views[0]!.rows.map(item => item.recordId));
 
-    if ((recordIds.length + newRecordIds.length) > MAX_RECORD_NUM) {
-      throw new Error(t(Strings.max_record_num_per_dst));
-    }
+    // if ((recordIds.length + newRecordIds.length) > MAX_RECORD_NUM) {
+    //  throw new Error(t(Strings.max_record_num_per_dst));
+    // }
 
     const linkFieldIds: IField[] = [];
     const specialActions: IJOTAction[] = [];

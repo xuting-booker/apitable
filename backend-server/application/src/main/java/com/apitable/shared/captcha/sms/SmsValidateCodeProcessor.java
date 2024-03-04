@@ -36,7 +36,6 @@ import com.apitable.shared.config.properties.SecurityProperties;
 import com.apitable.shared.util.DateHelper;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
-import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -95,32 +94,32 @@ public class SmsValidateCodeProcessor extends AbstractValidateCodeProcessor {
      */
     private void checkBeforeSend(String mobile, String ipAddr) {
         // The number of mobile phones sent on the day
-        String mobileSmsCountKey = RedisConstants.getSendCaptchaCountKey(mobile, "mobile");
+        // String mobileSmsCountKey = RedisConstants.getSendCaptchaCountKey(mobile, "mobile");
         // Number of IPs sent on the day
         String ipSmsCountKey = RedisConstants.getSendCaptchaCountKey(ipAddr, "ip:mobile");
         // mobile phone frequency
-        String sendSmsRateKey = RedisConstants.getSendCaptchaRateKey(mobile);
+        // String sendSmsRateKey = RedisConstants.getSendCaptchaRateKey(mobile);
 
         // The one-minute limit cannot be obtained again, unless the verification code expires and is automatically deleted
-        Integer sendSmsRateCount = (Integer) redisTemplate.opsForValue().get(sendSmsRateKey);
-        if (sendSmsRateCount != null) {
-            log.info(
-                "Repeated acquisitions are not allowed within 60 seconds，IP address={}, phone number={}",
-                ipAddr, mobile);
-            throw new BusinessException(SMS_SEND_ONLY_ONE_MINUTE);
-        } else {
-            // Lock for 1 minute not to send
-            redisTemplate.opsForValue().set(sendSmsRateKey, 1, 1, TimeUnit.MINUTES);
-        }
+        // Integer sendSmsRateCount = (Integer) redisTemplate.opsForValue().get(sendSmsRateKey);
+        // if (sendSmsRateCount != null) {
+        // log.info(
+        // "Repeated acquisitions are not allowed within 60 seconds，IP address={}, phone number={}",
+        // ipAddr, mobile);
+        // throw new BusinessException(SMS_SEND_ONLY_ONE_MINUTE);
+        // } else {
+        // Lock for 1 minute not to send
+        // redisTemplate.opsForValue().set(sendSmsRateKey, 1, 1, TimeUnit.MINUTES);
+        // }
 
         // The maximum number of SMS messages sent by the mobile phone in one day
-        Integer mobileSmsCount = (Integer) redisTemplate.opsForValue().get(mobileSmsCountKey);
-        if (mobileSmsCount != null && mobileSmsCount >= properties.getSms().getMaxSendCount()) {
-            log.error(
-                "The maximum number of SMS messages sent by the mobile phone in one day，IP address={}, phone number={}",
-                ipAddr, mobile);
-            throw new BusinessException(MOBILE_SEND_MAX_COUNT_LIMIT);
-        }
+        // Integer mobileSmsCount = (Integer) redisTemplate.opsForValue().get(mobileSmsCountKey);
+        // if (mobileSmsCount != null && mobileSmsCount >= properties.getSms().getMaxSendCount()) {
+        // log.error(
+        // "The maximum number of SMS messages sent by the mobile phone in one day，IP address={}, phone number={}",
+        // ipAddr, mobile);
+        // throw new BusinessException(MOBILE_SEND_MAX_COUNT_LIMIT);
+        // }
 
         Integer ipSmsCount = (Integer) redisTemplate.opsForValue().get(ipSmsCountKey);
         if (ipSmsCount != null && ipSmsCount >= properties.getSms().getMaxIpSendCount()) {

@@ -770,8 +770,7 @@ public class NodeController {
     @Parameter(name = "parentId", description = "Parent Node ID", required = true,
         schema = @Schema(type = "string"), in = ParameterIn.PATH, example = "fodNwmWE5QWPs")
     public ResponseData<NodeInfoVo> importExcel(@Valid ImportExcelOpRo data) throws IOException {
-        ExceptionUtil.isTrue(data.getFile().getSize() <= limitProperties.getMaxFileSize(),
-            ActionException.FILE_EXCEED_LIMIT);
+        // ExceptionUtil.isTrue(data.getFile().getSize() <= limitProperties.getMaxFileSize(),ActionException.FILE_EXCEED_LIMIT);
         Long userId = SessionContext.getUserId();
         // The method includes determining whether a node exists.
         String spaceId = iNodeService.getSpaceIdByNodeId(data.getParentId());

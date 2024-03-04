@@ -126,8 +126,8 @@ public class AuthController {
         // password login
         loginActionFunc.put(LoginType.PASSWORD, loginRo -> {
             // Password login requires human-machine authentication
-            humanVerificationServiceFacade.verifyNonRobot(
-                new NonRobotMetadata(loginRo.getData()));
+            // humanVerificationServiceFacade.verifyNonRobot(
+            // new NonRobotMetadata(loginRo.getData()));
             // Login processing
             Long userId = iAuthService.loginUsingPassword(loginRo);
             // event point - password login

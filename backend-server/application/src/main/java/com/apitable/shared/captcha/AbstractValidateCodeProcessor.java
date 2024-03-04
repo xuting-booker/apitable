@@ -83,7 +83,7 @@ public abstract class AbstractValidateCodeProcessor implements ValidateCodeProce
                                 boolean actual) {
         String target = validateTarget.getRealTarget();
         // Check the security verification code lock, if the verification error exceeds 5 times, the lock will be locked for 20 minutes
-        this.checkIfSend(target);
+        // this.checkIfSend(target);
         ValidateCodeType codeType = getValidateCodeType();
         int length;
         int effectiveTime;

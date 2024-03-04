@@ -36,7 +36,6 @@ import com.apitable.shared.util.DateHelper;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Collections;
-import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -82,28 +81,28 @@ public class EmailValidateCodeProcessor extends AbstractValidateCodeProcessor {
 
     private void checkBeforeSend(String email, String ipAddr) {
         // email sending frequency
-        String sendMailRateKey = RedisConstants.getSendCaptchaRateKey(email);
+        // String sendMailRateKey = RedisConstants.getSendCaptchaRateKey(email);
         // The one-minute limit cannot be obtained again, unless the verification code expires and is automatically deleted
-        Integer sendSmsRateCount = (Integer) redisTemplate.opsForValue().get(sendMailRateKey);
-        if (sendSmsRateCount != null) {
-            log.info(
-                "Repeated acquisitions are not allowed within 60 seconds，mail={}，ip address={}",
-                email, ipAddr);
-            throw new BusinessException(SMS_SEND_ONLY_ONE_MINUTE);
-        } else {
-            redisTemplate.opsForValue().set(sendMailRateKey, 1, 1, TimeUnit.MINUTES);
-        }
+        // Integer sendSmsRateCount = (Integer) redisTemplate.opsForValue().get(sendMailRateKey);
+        // if (sendSmsRateCount != null) {
+        // log.info(
+        // "Repeated acquisitions are not allowed within 60 seconds，mail={}，ip address={}",
+        // email, ipAddr);
+        // throw new BusinessException(SMS_SEND_ONLY_ONE_MINUTE);
+        // } else {
+        // redisTemplate.opsForValue().set(sendMailRateKey, 1, 1, TimeUnit.MINUTES);
+        // }
 
         // number of emails sent on the day
-        String emailCountKey = RedisConstants.getSendCaptchaCountKey(email, "email");
+        // String emailCountKey = RedisConstants.getSendCaptchaCountKey(email, "email");
         // maximum number of emails sent
-        Integer mailCount = (Integer) redisTemplate.opsForValue().get(emailCountKey);
-        if (mailCount != null && mailCount >= properties.getEmail().getMaxSendCount()) {
-            log.error(
-                "The maximum number of emails sent by this mailbox today has been reached，email={}",
-                email);
-            throw new BusinessException(EMAIL_SEND_MAX_COUNT_LIMIT);
-        }
+        // Integer mailCount = (Integer) redisTemplate.opsForValue().get(emailCountKey);
+        // if (mailCount != null && mailCount >= properties.getEmail().getMaxSendCount()) {
+        // log.error(
+        // "The maximum number of emails sent by this mailbox today has been reached，email={}",
+        // email);
+        // throw new BusinessException(EMAIL_SEND_MAX_COUNT_LIMIT);
+        // }
 
         // number of ips sent on the day
         String ipSmsCountKey = RedisConstants.getSendCaptchaCountKey(ipAddr, "ip:email");

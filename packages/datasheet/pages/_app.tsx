@@ -518,8 +518,6 @@ function MyAppMain({ Component, pageProps, envVars }: AppProps & { envVars: stri
               >
                 {(loading !== LoadingStatus.Complete || userLoading) && (
                   <div className="main-img-wrap" style={{ height: 'auto' }}>
-                    <img src={integrateCdnHost(getEnvVariables().LOGO!)} className="script-loading-logo-img" alt="logo" />
-                    <img src={integrateCdnHost(getEnvVariables().LOGO_TEXT_LIGHT!)} className="script-loading-logo-text-img" alt="logo_text_dark" />
                   </div>
                 )}
               </div>

@@ -316,9 +316,11 @@ _run-local-backend-server:
 	java -jar application/build/libs/application.jar
 
 _run-local-room-server:
-	source scripts/export-env.sh $$ENV_FILE;\
-	source scripts/export-env.sh $$DEVENV_FILE;\
-	pnpm run start:room-server
+        source scripts/export-env.sh $$ENV_FILE;\
+        source scripts/export-env.sh $$DEVENV_FILE;\
+        cd packages/room-server
+        pnpm run build
+        pnpm run start
 
 _run-perf-local-room-server:
 	source scripts/export-env.sh $$ENV_FILE;\
@@ -329,7 +331,9 @@ _run-local-web-server:
 	source scripts/export-env.sh $$ENV_FILE;\
 	source scripts/export-env.sh $$DEVENV_FILE;\
 	rm -rf packages/datasheet/web_build;\
-	pnpm run  sd
+	cd packages/datasheet
+    pnpm run build
+    pnpm run next:start
 
 _run-docker-databus-server:
 	$(_DATAENV) up databus-server

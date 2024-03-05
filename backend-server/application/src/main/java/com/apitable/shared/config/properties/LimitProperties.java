@@ -71,7 +71,7 @@ public class LimitProperties {
     /**
      * Maximum rows.
      */
-    private Integer maxRowCount = 50000;
+    private Integer maxRowCount = 70111;
 
     /**
      * limitation of attachment(byte).

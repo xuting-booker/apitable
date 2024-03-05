@@ -36,7 +36,7 @@ export class EnvConfigService implements OnApplicationShutdown {
       transformLimit: parseInt(process.env.SERVER_TRANSFORM_LIMIT!) || 100000,
       maxViewCount: parseInt(process.env.SERVER_MAX_VIEW_COUNT!) || 30,
       maxFieldCount: parseInt(process.env.SERVER_MAX_FIELD_COUNT!) || 200,
-      maxRecordCount: parseInt(process.env.SERVER_MAX_RECORD_COUNT!) || 50000,
+      maxRecordCount: parseInt(process.env.SERVER_MAX_RECORD_COUNT!) || 70111,
       recordRemindRange: parseInt(process.env.SERVER_RECORD_REMIND_RANGE!) || 90,
     };
     this.configStore.set(EnvConfigKey.CONST, server);

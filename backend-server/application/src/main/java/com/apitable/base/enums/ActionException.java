@@ -67,7 +67,7 @@ public enum ActionException implements BaseException {
 
     FILE_EXCEED_LIMIT(240, "a single upload file should not exceed 20 mb"),
 
-    ROW_EXCEED_LIMIT(240, "The number of lines exceeds the limit of 50000 lines"),
+    ROW_EXCEED_LIMIT(240, "The number of lines exceeds the limit of 70111 lines"),
 
     COLUMN_EXCEED_LIMIT(240, "the number of columns exceeds the 200 limit"),
 
